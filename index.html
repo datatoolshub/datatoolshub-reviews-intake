@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit a Data Tool - DataToolsHub</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f8fafc;
+            color: #334155;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: 600;
+        }
+        .header p {
+            margin: 10px 0 0 0;
+            opacity: 0.9;
+            font-size: 16px;
+        }
+        .form-container {
+            padding: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #374151;
+        }
+        input[type="text"], input[type="url"], input[type="email"], textarea, select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.2s;
+            box-sizing: border-box;
+        }
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        .required {
+            color: #ef4444;
+        }
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+            width: 100%;
+        }
+        .submit-btn:hover {
+            transform: translateY(-1px);
+        }
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .success-message {
+            background: #d1fae5;
+            color: #065f46;
+            padding: 16px;
+            border-radius: 8px;
+            margin-top: 20px;
+            display: none;
+        }
+        .error-message {
+            background: #fee2e2;
+            color: #991b1b;
+            padding: 16px;
+            border-radius: 8px;
+            margin-top: 20px;
+            display: none;
+        }
+        .loading {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Submit Your Data Tool</h1>
+            <p>Help us expand our comprehensive guide to data governance tools</p>
+        </div>
+        
+        <div class="form-container">
+            <form id="submissionForm">
+                <div class="form-group">
+                    <label for="tool_name">Tool Name <span class="required">*</span></label>
+                    <input type="text" id="tool_name" name="tool_name" placeholder="e.g., Secoda" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="company">Company/Developer <span class="required">*</span></label>
+                    <input type="text" id="company" name="company" placeholder="e.g., Secoda Inc." required>
+                </div>
+
+                <div class="form-group">
+                    <label for="category">Primary Category <span class="required">*</span></label>
+                    <select id="category" name="category" required>
+                        <option value="">Select a Category</option>
+                        <option value="All-in-One">All-in-One</option>
+                        <option value="Data Catalog">Data Catalog</option>
+                        <option value="Data Governance">Data Governance</option>
+                        <option value="Data Lineage">Data Lineage</option>
+                        <option value="Data Observability">Data Observability</option>
+                        <option value="Data Quality">Data Quality</option>
+                        <option value="Data Transformation">Data Transformation</option>
+                        <option value="Data Visualization">Data Visualization</option>
+                        <option value="Data Warehouse">Data Warehouse</option>
+                        <option value="Database">Database</option>
+                        <option value="Data Pipeline">Data Pipeline</option>
+                        <option value="Query Engine">Query Engine</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Brief Description <span class="required">*</span></label>
+                    <textarea id="description" name="description" placeholder="A short summary of what the tool does and its key value proposition." required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="website">Official Website URL <span class="required">*</span></label>
+                    <input type="url" id="website" name="website" placeholder="https://www.example.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="features">Key Features</label>
+                    <input type="text" id="features" name="features" placeholder="e.g., AI Search, Column-level Lineage, Automated Quality Checks">
+                </div>
+
+                <div class="form-group">
+                    <label for="pricing">Pricing Model</label>
+                    <input type="text" id="pricing" name="pricing" placeholder="e.g., Freemium, Enterprise, Open Source, Usage-based">
+                </div>
+
+                <div class="form-group">
+                    <label for="contact_email">Your Contact Email <span class="required">*</span></label>
+                    <input type="email" id="contact_email" name="contact_email" placeholder="your.email@example.com" required>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submitBtn">Submit Tool for Review</button>
+            </form>
+
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>Creating GitHub issue...</p>
+            </div>
+
+            <div class="success-message" id="successMessage">
+                <strong>Success!</strong> Your tool submission has been created as a GitHub issue. We'll review it and add it to our guide if it meets our criteria.
+            </div>
+
+            <div class="error-message" id="errorMessage">
+                <strong>Error:</strong> <span id="errorText"></span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('submissionForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const loading = document.getElementById('loading');
+            const successMessage = document.getElementById('successMessage');
+            const errorMessage = document.getElementById('errorMessage');
+            
+            // Show loading state
+            submitBtn.disabled = true;
+            loading.style.display = 'block';
+            successMessage.style.display = 'none';
+            errorMessage.style.display = 'none';
+            
+            try {
+                // Get form data
+                const formData = new FormData(this);
+                const data = Object.fromEntries(formData.entries());
+                
+                // Create GitHub issue content
+                const issueTitle = `New Tool Submission: ${data.tool_name}`;
+                const issueBody = `## Tool Information
+                
+**Tool Name:** ${data.tool_name}
+**Company/Developer:** ${data.company}
+**Category:** ${data.category}
+**Website:** ${data.website}
+**Contact Email:** ${data.contact_email}
+
+## Description
+${data.description}
+
+## Additional Details
+${data.features ? `**Key Features:** ${data.features}` : ''}
+${data.pricing ? `**Pricing Model:** ${data.pricing}` : ''}
+
+## Review Checklist
+- [ ] Tool meets data governance criteria
+- [ ] Website is accessible and professional
+- [ ] Tool is actively maintained
+- [ ] Add to appropriate category
+- [ ] Create tool page
+- [ ] Update comparison tables
+
+---
+*Submitted via DataToolsHub submission form*`;
+
+                // Create GitHub issue using GitHub API
+                const response = await fetch('https://api.github.com/repos/datatoolshub/datatoolshub/issues', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/vnd.github.v3+json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        title: issueTitle,
+                        body: issueBody,
+                        labels: ['tool-submission', 'pending-review']
+                    })
+                });
+                
+                if (response.ok) {
+                    const issue = await response.json();
+                    successMessage.innerHTML = `<strong>Success!</strong> Your tool submission has been created as <a href="${issue.html_url}" target="_blank">GitHub issue #${issue.number}</a>. We'll review it and add it to our guide if it meets our criteria.`;
+                    successMessage.style.display = 'block';
+                    this.reset();
+                } else {
+                    throw new Error(`GitHub API error: ${response.status}`);
+                }
+                
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('errorText').textContent = error.message;
+                errorMessage.style.display = 'block';
+            } finally {
+                // Hide loading state
+                submitBtn.disabled = false;
+                loading.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
